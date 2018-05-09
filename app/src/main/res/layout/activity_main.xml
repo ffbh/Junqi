@@ -14,38 +14,36 @@
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:layout_weight="10"
-            android:layout_margin="50dp"
             android:padding="5dp"
             android:background="#CC00FF"
     >
 
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="开始"
-                android:textColor="#000000"
-                android:textSize="70dip"
-                android:background="@drawable/text_color"
+      <Button
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="开始"
+              android:textColor="#000000"
+              android:textSize="70dip"
 
-        />
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="阵型"
-                android:textSize="70dip"
-        />
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="复盘"
-                android:textSize="70dip"
-        />
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="退出"
-                android:textSize="70dip"
-        />
+              android:id="@+id/start"/>
+      <Button
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="阵型"
+              android:textSize="70dip"
+              android:id="@+id/map"/>
+      <Button
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="复盘"
+              android:textSize="70dip"
+              android:id="@+id/replay"/>
+      <Button
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="退出"
+              android:textSize="70dip"
+              android:id="@+id/quit"/>
     </LinearLayout>
 
 
