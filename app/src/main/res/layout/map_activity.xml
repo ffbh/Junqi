@@ -42,13 +42,13 @@
     <AbsoluteLayout
             android:id="@+id/edit_layout"
             android:layout_width="fill_parent"
-            android:layout_height="550dp"
+            android:layout_height="fill_parent"
             android:background="#00ff00">
         <ImageView
                 android:id="@+id/map_edit"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:background="@drawable/mapsingle"
+                android:background="@drawable/map"
         />
     </AbsoluteLayout>
 

@@ -5,9 +5,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
+import com.example.fbh.junqi.file.Util;
+
+
+import java.io.File;
+import java.io.InputStream;
 
 public class MapActivity extends Activity {
 
@@ -71,17 +75,21 @@ public class MapActivity extends Activity {
 //            }
 //        });
 
-        String[] aaa = new String[30];
-        for(int i=0;i<30;++i)
-            aaa[i] = "司令";
+
       //  Log.e("Vmap:",map.getVisibility()+"");
         AbsoluteLayout layout = (AbsoluteLayout)findViewById(R.id.edit_layout);
-        Log.e("layoutH",layout.getHeight()+"");
+  //      Log.e("layoutH",layout.getHeight()+"");
+
+        Log.e("test","start");
 
 
+        String ch[] = Util.file_read(getResources().openRawResource(R.raw.moren));
+
+
+        Log.e("test","ok");
 
         mapSignal = new MapSignal(layout,getBaseContext(),
-                aaa,0X00ff00);
+                ch,0X00ff00);
         layout.invalidate();
     }
 
