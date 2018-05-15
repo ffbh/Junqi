@@ -17,7 +17,6 @@ public class MapActivity extends Activity {
 
 
 
-    MapSignal mapSignal = null;
 
 
 
@@ -76,19 +75,17 @@ public class MapActivity extends Activity {
 //        });
 
 
-      //  Log.e("Vmap:",map.getVisibility()+"");
-        AbsoluteLayout layout = (AbsoluteLayout)findViewById(R.id.edit_layout);
-  //      Log.e("layoutH",layout.getHeight()+"");
 
-        Log.e("test","start");
+        AbsoluteLayout layout = (AbsoluteLayout)findViewById(R.id.edit_layout);
+
+
 
 
         String ch[] = Util.file_read(getResources().openRawResource(R.raw.moren));
 
 
-        Log.e("test","ok");
 
-        mapSignal = new MapSignal(layout,getBaseContext(),
+        MapSignal mapSignal = new MapSignal(layout,getBaseContext(),
                 ch,0X00ff00);
         layout.invalidate();
     }

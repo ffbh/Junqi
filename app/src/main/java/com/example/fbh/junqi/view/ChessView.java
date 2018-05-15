@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageView;
+import com.example.fbh.junqi.Board.Chess;
 
 public class ChessView extends View {
     private Chess chess = null;

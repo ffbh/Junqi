@@ -24,9 +24,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.e("click","start");
 
-        //        Intent start_view = new Intent(MainActivity.this, SecondActivity.class);
-
-
+               Intent start_view = new Intent(MainActivity.this, StartActivity.class);
+               startActivity(start_view);
 
 
             }

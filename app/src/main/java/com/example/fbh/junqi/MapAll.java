@@ -1,28 +1,32 @@
 package com.example.fbh.junqi;
 
 import android.content.Context;
+import android.util.Pair;
 import android.view.View;
-import android.widget.*;
+import android.widget.AbsListView;
+import android.widget.AbsoluteLayout;
+import android.widget.Button;
+import com.example.fbh.junqi.Board.ChessBoard;
+import com.example.fbh.junqi.ClickEvent.StartEvent;
 import com.example.fbh.junqi.ClickEvent.mapEvent;
 
-public class MapSignal {
-
+public class MapAll {
     private Button[][] chessUp = new Button[6][5];
     private Button[] chessM = new Button[3];
     private Button[][] chessDown = new Button[6][5];
     private Context context = null;
     AbsoluteLayout father = null;
-    public MapSignal(AbsoluteLayout father, Context context, String[] ch, int color) {
+    public MapAll(AbsoluteLayout father, Context context, String[] ch1,String[] ch2, int color) {
 
         this.father = father;
         this.context = context;
-        Init(ch,color);
+        Init(ch1,ch2,color);
     }
 
 
 
 
-    void Init(String[] ch,int color){
+    void Init(String[] ch1,String[] ch2,int color){
 
         int size_w = 200;
         int size_h = 100;
@@ -39,24 +43,31 @@ public class MapSignal {
         adjust[5] = 30;
 
 
-   /*     for(int i=0;i<6;++i)
+        for(int i=0;i<6;++i)
             for(int j=0;j<5;++j){
                 int sx = start_x + v_p * j;
                 int sy = start_y + h_p * i + adjust[i];
              //   chess[i][j] = new ChessView(context,new Chess(ch[i*5+j],color));
                 chessUp[i][j] = new Button(context);
-                chessUp[i][j].setText(ch[0]);
-                chessUp[i][j].setTextColor(0Xff0000);
+                chessUp[i][j].setText(ch1[i*5+j]);
+                chessUp[i][j].setBackgroundColor(ChessBoard.m2);
+                chessUp[i][j].getPaint().setFakeBoldText(true);
         //        chess[i][j].setBackgroundColor(0Xffff00);
         //        Log.e("sx",sx+"");
          //       Log.e("sy",sy+"");
                 chessUp[i][j].setX(sx);
                 chessUp[i][j].setY(sy);
               //  chess[i][j].setPadding(sx, sy, size_w + sx,size_h+sy);
-                chessUp[i][j].setVisibility(View.VISIBLE);
+                if(i==2&&j==1||i==2&&j==3||i==4&&j==1||i==4&&j==3||i==3&&j==2) {
+                    chessUp[i][j].getBackground().setAlpha(0);
+                    chessUp[i][j].setText("");
+                }
+                chessUp[i][j].setOnClickListener(new StartEvent());
+                chessUp[i][j].setPadding(0,0,0,0);
             //    Log.e("sizew",size_w+"");
                 chessUp[i][j].setLayoutParams(new AbsListView.LayoutParams(size_w,size_h));
                 father.addView(chessUp[i][j]);
+                chessUp[i][j].setTag(new Pair(i,j));
            //     Log.e("V:",chess[i][j].getVisibility()+"");
                 chessUp[i][j].invalidate();
             }
@@ -67,25 +78,28 @@ public class MapSignal {
             int sy = 800;
             //   chess[i][j] = new ChessView(context,new Chess(ch[i*5+j],color));
             chessM[i] = new Button(context);
-            chessM[i].setText(ch[0]);
-            chessM[i].setTextColor(0Xff0000);
+            chessM[i].getPaint().setFakeBoldText(true);
+            chessM[i].setPadding(0,0,0,0);
             //        chess[i][j].setBackgroundColor(0Xffff00);
             //        Log.e("sx",sx+"");
             //       Log.e("sy",sy+"");
             chessM[i].setX(sx);
             chessM[i].setY(sy);
+            chessM[i].setOnClickListener(new StartEvent());
             //  chess[i][j].setPadding(sx, sy, size_w + sx,size_h+sy);
-            chessM[i].setVisibility(View.VISIBLE);
+         //   chessM[i].setVisibility(View.INVISIBLE);
+            chessM[i].getBackground().setAlpha(0);
             //    Log.e("sizew",size_w+"");
             chessM[i].setLayoutParams(new AbsListView.LayoutParams(size_w,size_h));
             father.addView(chessM[i]);
             //     Log.e("V:",chess[i][j].getVisibility()+"");
+            chessM[i].setTag(new Pair(6,i*2));
             chessM[i].invalidate();
 
 
         }
 
-*/
+
 
 
         start_x = 30;
@@ -100,36 +114,37 @@ public class MapSignal {
 
         for(int i=0;i<6;++i)
             for(int j=0;j<5;++j){
-                if(i==1&&j==1||i==1&&j==3||i==3&&j==1||i==3&&j==3||i==2&&j==2)
-                    continue;
+
 
                 int sx = start_x + v_p * j;
                 int sy = start_y + h_p * i + adjust[i];
                 //   chess[i][j] = new ChessView(context,new Chess(ch[i*5+j],color));
                 chessDown[i][j] = new Button(context);
-                chessDown[i][j].setText(ch[i*5+j]);
+                chessDown[i][j].setText(ch2[i*5+j]);
                 chessDown[i][j].getPaint().setFakeBoldText(true);
-        //        chessDown[i][j].setTextColor(0Xff0000);
+                //        chessDown[i][j].setTextColor(0Xff0000);
                 //        chess[i][j].setBackgroundColor(0Xffff00);
                 //        Log.e("sx",sx+"");
                 //       Log.e("sy",sy+"");
                 chessDown[i][j].setX(sx);
                 chessDown[i][j].setY(sy);
-                chessDown[i][j].setBackgroundColor(mapEvent.mm);
+                chessDown[i][j].setBackgroundColor(ChessBoard.m1);
                 //  chess[i][j].setPadding(sx, sy, size_w + sx,size_h+sy);
-                chessDown[i][j].setVisibility(View.VISIBLE);
+                if(i==1&&j==1||i==1&&j==3||i==3&&j==1||i==3&&j==3||i==2&&j==2) {
+                    chessDown[i][j].getBackground().setAlpha(0);
+                    chessDown[i][j].setText("");
+                }
                 chessDown[i][j].setPadding(0,0,0,0);
                 //    Log.e("sizew",size_w+"");
                 chessDown[i][j].setLayoutParams(new AbsListView.LayoutParams(size_w,size_h));
-                chessDown[i][j].setOnClickListener(new mapEvent());
-
+                chessDown[i][j].setOnClickListener(new StartEvent());
+                chessDown[i][j].setTag(new Pair(7+i,j));
                 father.addView(chessDown[i][j]);
 
                 //     Log.e("V:",chess[i][j].getVisibility()+"");
                 chessDown[i][j].invalidate();
             }
     }
-
 
 
 }
