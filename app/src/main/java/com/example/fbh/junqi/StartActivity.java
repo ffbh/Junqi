@@ -11,7 +11,7 @@ import com.example.fbh.junqi.Board.ChessBoard;
 import com.example.fbh.junqi.file.Util;
 
 public class StartActivity extends Activity {
-
+    public static MapAll mapAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -37,8 +37,7 @@ public class StartActivity extends Activity {
             public void onClick(View v) {
                 Log.e("click","start_regret");
 
-                Intent map_view = new Intent(StartActivity.this, MainActivity.class);
-                startActivity(map_view);
+                ChessBoard.goBack();
             }
         });
 
@@ -76,7 +75,7 @@ public class StartActivity extends Activity {
 
         ChessBoard.Init(ch2,ch1);
 
-        MapAll mapAll = new MapAll(layout,getBaseContext(),
+        mapAll = new MapAll(layout,getBaseContext(),
                 ch2,ch1,0X00ff00);
         layout.invalidate();
 

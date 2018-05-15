@@ -81,5 +81,12 @@ public class Chess {
         this.can_move = chess.can_move;
     }
 
-
+    @Override
+    public String toString() {
+        return "Chess{" +
+                "name='" + name + '\'' +
+                ", color=" + color +
+                ", can_move=" + can_move +
+                '}';
+    }
 }

@@ -28,9 +28,9 @@ public class StartEvent implements View.OnClickListener {
                     v.getBackground().setAlpha(255);
                     but.getBackground().setAlpha(0);
                     if (ChessBoard.getFlag())
-                        ((Button) v).setBackgroundColor(ChessBoard.m1);
-                    else
                         ((Button) v).setBackgroundColor(ChessBoard.m2);
+                    else
+                        ((Button) v).setBackgroundColor(ChessBoard.m1);
                 }
                 else if(ans.second == 0){
                     ((Button) v).setText("");
@@ -40,6 +40,7 @@ public class StartEvent implements View.OnClickListener {
                     but.getBackground().setAlpha(0);
                 }
                 else{
+
                     but.setText("");
                     but.getBackground().setAlpha(0);
                 }
@@ -53,9 +54,9 @@ public class StartEvent implements View.OnClickListener {
             }
             else{
                 if (!ChessBoard.getFlag())
-                    but.setBackgroundColor(ChessBoard.m1);
-                else
                     but.setBackgroundColor(ChessBoard.m2);
+                else
+                    but.setBackgroundColor(ChessBoard.m1);
                 but = null;
 
             }

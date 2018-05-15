@@ -4,8 +4,10 @@ import android.graphics.Color;
 import android.util.Log;
 import android.util.Pair;
 import android.widget.Button;
+import com.example.fbh.junqi.StartActivity;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class ChessBoard {
     public static Chess[][] chessBoard = new Chess[13][5];
@@ -18,7 +20,7 @@ public class ChessBoard {
     public static int m2 = Color.parseColor("#B3EE3A");
     public static Chess old = null;
     public static Pair<Integer,Integer> old_pos;
-
+    public static Stack<Pair<Pair<Integer,Integer>,Chess>> V = new Stack<>();
 
     static {
         for(int i=0;i<13;++i)
@@ -253,6 +255,8 @@ public class ChessBoard {
         v = can_move(sx,sy,ex,ey,turn);
         Log.e("judge_end","canmove");
         if(v){
+            V.add(new Pair(new Pair(old_pos.first,old_pos.second), new Chess(old.getName(),old.getColor())));
+            V.add(new Pair(new Pair(p.first,p.second),new Chess(click.getName(),click.getColor())));
             if(k==1){
                 click.change(old);
                 old.dead();
@@ -264,6 +268,8 @@ public class ChessBoard {
             else{
                 old.dead();
             }
+
+
             next_round();
         }
 
@@ -282,14 +288,30 @@ public class ChessBoard {
     public static void Init(String[] ch1,String[] ch2){
         for(int i=0;i<6;++i)
             for(int j=0;j<5;++j)
-            chessBoard[i][j] = new Chess(ch1[i*5+j],m1);
+            chessBoard[i][j] = new Chess(ch1[i*5+j],m2);
         for(int i=0;i<5;++i)
             chessBoard[6][i] = new Chess("",0);
         for(int i=0;i<6;++i)
             for(int j=0;j<5;++j)
-                chessBoard[7+i][j] = new Chess(ch2[i*5+j],m2);
+                chessBoard[7+i][j] = new Chess(ch2[i*5+j],m1);
+
+        flag = true;
+        V.clear();
+
     }
 
+    public static boolean goBack(){
+        if(V.empty())
+            return false;
+        Pair<Pair<Integer,Integer>,Chess> a = V.pop();
+        Pair<Pair<Integer,Integer>,Chess> b = V.pop();
+        StartActivity.mapAll.setChess(a.first,a.second);
+        StartActivity.mapAll.setChess(b.first,b.second);
+        chessBoard[a.first.first][a.first.second].change(a.second);
+        chessBoard[b.first.first][b.first.second].change(b.second);
+        next_round();
+        return true;
+    }
 
 
 

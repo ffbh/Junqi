@@ -1,11 +1,13 @@
 package com.example.fbh.junqi;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AbsoluteLayout;
 import android.widget.Button;
+import com.example.fbh.junqi.Board.Chess;
 import com.example.fbh.junqi.Board.ChessBoard;
 import com.example.fbh.junqi.ClickEvent.StartEvent;
 import com.example.fbh.junqi.ClickEvent.mapEvent;
@@ -24,6 +26,32 @@ public class MapAll {
     }
 
 
+    public void setChess(Pair<Integer,Integer> p , Chess chess){
+        Log.e("set",p.toString()+" "+chess.toString());
+        int alp = 255;
+        if(chess.getName().length() == 0){
+            alp = 0;
+        }
+        if(p.first<6){
+            chessUp[p.first][p.second].setText(chess.getName());
+            chessUp[p.first][p.second].setBackgroundColor(chess.getColor());
+            chessUp[p.first][p.second].getBackground().setAlpha(alp);
+            chessUp[p.first][p.second].invalidate();
+        }
+        else if(p.first ==6){
+            chessM[p.second].setText(chess.getName());
+            chessM[p.second].setBackgroundColor(chess.getColor());
+            chessM[p.second].getBackground().setAlpha(alp);
+            chessM[p.second].invalidate();
+        }
+        else{
+            chessDown[p.first-7][p.second].setText(chess.getName());
+            chessDown[p.first-7][p.second].setBackgroundColor(chess.getColor());
+            chessDown[p.first-7][p.second].getBackground().setAlpha(alp);
+            chessDown[p.first-7][p.second].invalidate();
+        }
+        father.invalidate();
+    }
 
 
     void Init(String[] ch1,String[] ch2,int color){
