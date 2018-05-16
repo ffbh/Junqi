@@ -7,10 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import com.example.fbh.junqi.Board.Chess;
 import com.example.fbh.junqi.Board.ChessBoard;
+import com.example.fbh.junqi.StartActivity;
 
 public class StartEvent implements View.OnClickListener {
     private static Button but = null;
-
+    public static boolean gameover = false;
     @Override
     public void onClick(View v) {
         Log.e("click","start move");
@@ -46,11 +47,14 @@ public class StartEvent implements View.OnClickListener {
                 }
 
 
-
                 but.invalidate();
                 v.invalidate();
                 but = null;
                 Log.e("move", a + "<-->" + b);
+
+
+                gameover = !StartActivity.mapAll.check();
+                Log.e("gamrover",gameover+"");
             }
             else{
                 if (!ChessBoard.getFlag())

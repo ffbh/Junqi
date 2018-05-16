@@ -14,6 +14,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import com.example.fbh.junqi.ClickEvent.StartEvent;
 import com.example.fbh.junqi.file.Util;
 
 
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.e("click","start");
-
+                StartEvent.gameover = false;
                Intent start_view = new Intent(MainActivity.this, StartActivity.class);
                startActivity(start_view);
 

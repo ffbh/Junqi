@@ -1,12 +1,14 @@
 package com.example.fbh.junqi;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AbsoluteLayout;
 import android.widget.Button;
+import android.widget.TextView;
 import com.example.fbh.junqi.Board.Chess;
 import com.example.fbh.junqi.Board.ChessBoard;
 import com.example.fbh.junqi.ClickEvent.StartEvent;
@@ -16,6 +18,7 @@ public class MapAll {
     private Button[][] chessUp = new Button[6][5];
     private Button[] chessM = new Button[3];
     private Button[][] chessDown = new Button[6][5];
+    private TextView text;
     private Context context = null;
     AbsoluteLayout father = null;
     public MapAll(AbsoluteLayout father, Context context, String[] ch1,String[] ch2, int color) {
@@ -100,7 +103,19 @@ public class MapAll {
                 chessUp[i][j].invalidate();
             }
 
-
+        text  = new TextView(context);
+        text.setText("军旗被抗,游戏结束");
+        text.setX(start_x);
+        text.setY(770);
+        text.setLayoutParams(new AbsListView.LayoutParams(size_w * 5,size_h * 2));
+        text.getPaint().setFakeBoldText(true);
+        text.setPadding(0,0,0,0);
+        father.addView(text);
+      //  text.setBackgroundColor(Color.WHITE);
+        text.setTextColor(Color.RED);
+        text.setTextSize(40);
+        text.setVisibility(View.INVISIBLE);
+        text.invalidate();
         for(int i=0;i<3;++i){
             int sx = start_x + v_p * i * 2;
             int sy = 800;
@@ -185,5 +200,25 @@ public class MapAll {
             }
     }
 
+
+    public boolean check(){
+        int num = 0;
+        if(chessUp[0][1].getText().toString().equals("军旗")){
+            num++;
+        }
+        if(chessUp[0][3].getText().toString().equals("军旗")){
+            num++;
+        }
+        if(chessDown[5][1].getText().toString().equals("军旗")){
+            num++;
+        }
+        if(chessDown[5][3].getText().toString().equals("军旗")){
+            num++;
+        }
+        if(num != 2){
+            text.setVisibility(View.VISIBLE);
+        }
+        return num == 2;
+    }
 
 }
