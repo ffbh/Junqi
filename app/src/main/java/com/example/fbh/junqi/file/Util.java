@@ -1,6 +1,9 @@
 package com.example.fbh.junqi.file;
 
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import com.example.fbh.junqi.R;
 
@@ -28,6 +31,51 @@ public class Util {
             Log.e("error",e.toString());
         }
         return ans;
+    }
+
+    public static Intent getTextFileIntent(Uri uri2) {
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addCategory("android.intent.category.DEFAULT");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+     //   Uri uri2 = Uri.fromFile(new File(param ));
+     //   Uri uri2 = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider");
+        intent.setDataAndType(uri2, "text/plain");
+
+        return intent;
+    }
+
+
+    public static String Read(FileInputStream fis){
+        String ans = "";
+        try {
+            int len = 0;
+            byte[] buf = new byte[4096];
+            while ((len = fis.read(buf)) != -1) {
+                ans += new String(buf, 0, len);
+            }
+            fis.close();
+        }
+        catch(Exception e){
+            Log.e("read_error",e.toString());
+        }
+
+       return ans;
+    }
+
+    public static void  Write(FileOutputStream fos,String data){
+        Log.e("write","start");
+        try {
+            byte[] buffer = data.getBytes();
+            // 开始写入数据到这个文件。
+            fos.write(buffer, 0, buffer.length);
+            fos.flush();
+            fos.close();
+        }
+        catch(Exception e){
+            Log.e("write_error",e.toString());
+        }
+        Log.e("write","end");
     }
 
 }

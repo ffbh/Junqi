@@ -20,6 +20,26 @@ public class MapSignal {
     }
 
 
+    String  getMaptext(){
+        String ans = "";
+        for(int i=0;i<6;++i)
+            for(int j=0;j<5;++j){
+                if(chessDown[i][j] == null){
+                    ans += "空空 ";
+                    continue;
+                }
+                CharSequence t = chessDown[i][j].getText();
+                if(t == null || t.toString().length() == 0){
+                    ans += "空空";
+                }
+                else{
+                    ans += t.toString();
+                }
+                ans += " ";
+            }
+        return ans;
+
+    }
 
 
     void Init(String[] ch,int color){
