@@ -11,8 +11,7 @@ import com.example.fbh.junqi.Board.ChessBoard;
 import com.example.fbh.junqi.file.Util;
 
 public class StartActivity extends Activity {
-    public static MapAll mapAll;
-
+    public static  MapAll mapAll;
     @Override
     protected void onCreate(Bundle savedInstanceState){
 
@@ -25,8 +24,9 @@ public class StartActivity extends Activity {
             public void onClick(View v) {
                 Log.e("click","start_exit");
 
-                Intent map_view = new Intent(StartActivity.this, MainActivity.class);
-                startActivity(map_view);
+       //         Intent map_view = new Intent(StartActivity.this, MainActivity.class);
+        //        startActivity(map_view);
+                StartActivity.this.finish();
             }
         });
 
@@ -47,8 +47,9 @@ public class StartActivity extends Activity {
             public void onClick(View v) {
                 Log.e("click","start_fail");
 
-                Intent map_view = new Intent(StartActivity.this, MainActivity.class);
-                startActivity(map_view);
+//                Intent map_view = new Intent(StartActivity.this, MainActivity.class);
+//                startActivity(map_view);
+                StartActivity.this.finish();
             }
         });
 
@@ -58,18 +59,27 @@ public class StartActivity extends Activity {
             public void onClick(View v) {
                 Log.e("click","start_map");
 
-                Intent map_view = new Intent(StartActivity.this, MainActivity.class);
+
+                Intent map_view = new Intent(StartActivity.this, Choose.class);
                 startActivity(map_view);
             }
         });
 
-        AbsoluteLayout layout = (AbsoluteLayout)findViewById(R.id.edit_layout);
+
 
 
 
 
         String ch1[] = Util.file_read(getResources().openRawResource(R.raw.moren));
         String ch2[] = new String[30];
+
+        Init(ch1,ch2);
+
+    }
+
+    public  void Init(String[] ch1,String[] ch2){
+        AbsoluteLayout layout = (AbsoluteLayout)findViewById(R.id.edit_layout);
+
         for(int i=0;i<30;++i)
             ch2[i] = ch1[29-i];
 
@@ -80,10 +90,6 @@ public class StartActivity extends Activity {
         layout.invalidate();
 
 
-
-
     }
-
-
 
 }

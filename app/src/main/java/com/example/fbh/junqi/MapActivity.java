@@ -38,9 +38,9 @@ public class MapActivity extends Activity {
             public void onClick(View v) {
                 Log.e("click", "map_exit");
                 file_choose = false;
-                Intent map_view = new Intent(MapActivity.this, MainActivity.class);
+            //    Intent map_view = new Intent(MapActivity.this, MainActivity.class);
                 MapActivity.this.finish();
-                startActivity(map_view);
+            //    startActivity(map_view);
 
             }
         });
@@ -85,9 +85,9 @@ public class MapActivity extends Activity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                        Intent map_view = new Intent(MapActivity.this, MainActivity.class);
+                  //      Intent map_view = new Intent(MapActivity.this, MainActivity.class);
                         MapActivity.this.finish();
-                        startActivity(map_view);
+                 //       startActivity(map_view);
                     }
                 }.start();
 
@@ -152,7 +152,6 @@ public class MapActivity extends Activity {
     private static boolean file_choose = false;
 
     private static final int FILE_SELECT_CODE = 0;
-    private static final String TAG = "VideoActivity";
     private static String path = "/storage/emulated/0/junqi/map/map1.jq";
     ///external_files/junqi/map/map5.jq
 
@@ -161,7 +160,7 @@ public class MapActivity extends Activity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
         if (resultCode != MainActivity.RESULT_OK) {
-            Log.e(TAG, "onActivityResult() error, resultCode: " + resultCode);
+            Log.e("se", "onActivityResult() error, resultCode: " + resultCode);
             super.onActivityResult(requestCode, resultCode, data);
             return;
         }
@@ -169,7 +168,7 @@ public class MapActivity extends Activity {
             Uri uri = data.getData();
             path = uri.getPath();
             path = path.replaceAll("external_files","storage\\/emulated\\/0");
-            Log.e(TAG, "------->" + path);
+            Log.e("se", "------->" + path);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

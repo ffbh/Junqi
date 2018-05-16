@@ -29,7 +29,11 @@
             </intent-filter>
         </activity>
 
-
+        <activity android:name=".Choose">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
         <provider
                 android:name="android.support.v4.content.FileProvider"
                 android:authorities="${applicationId}.provider"

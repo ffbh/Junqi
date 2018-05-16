@@ -78,4 +78,30 @@ public class Util {
         Log.e("write","end");
     }
 
+    public static String[] getChess(String path){
+        String ans = null;
+        try {
+            FileInputStream fis = new FileInputStream(path);
+            //      ans = Util.Read(openFileInput(path));
+            ans = Util.Read(fis);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String[] kk = ans.split("\\s+");
+        for(int i=0;i<kk.length;++i)
+            if(kk[i].equals("空空")){
+                kk[i] = "";
+            }
+        return kk;
+    }
+
+    public static String[] reverse(String[] a){
+        String[] b = new String[a.length];
+        for(int i=0;i<a.length;++i)
+            b[i] = a[a.length-i-1];
+
+        return b;
+    }
+
+
 }

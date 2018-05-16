@@ -175,4 +175,15 @@ public class MapAll {
     }
 
 
+    void setMapStart(String[] ch1,String[] ch2){
+        for(int i=0;i<6;++i)
+            for(int j=0;j<5;++j){
+                chessUp[i][j].setText(ch1[i*5+j]);
+                chessUp[i][j].invalidate();
+                chessDown[i][j].setText(ch2[i*5+j]);
+                chessDown[i][j].invalidate();
+            }
+    }
+
+
 }
