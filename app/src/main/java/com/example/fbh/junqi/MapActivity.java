@@ -2,9 +2,13 @@ package com.example.fbh.junqi;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
@@ -47,6 +51,18 @@ public class MapActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Log.e("click", "map_save");
+
+
+
+
+
+                new AlertDialog.Builder(MapActivity.this)
+                        .setTitle("保存")
+                        .setMessage("正在保存到:"+path+"...")
+                        .setPositiveButton("确定", null)
+                        .show();
+
+
                 file_choose = false;
                 String ttt = mapSignal.getMaptext();
                 Log.e("chess_mess",ttt);
@@ -60,9 +76,21 @@ public class MapActivity extends Activity {
                     e.printStackTrace();
                 }
 
-                Intent map_view = new Intent(MapActivity.this, MainActivity.class);
-                MapActivity.this.finish();
-                startActivity(map_view);
+
+                new Thread(){
+                    @Override
+                    public void run() {
+                        try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                        Intent map_view = new Intent(MapActivity.this, MainActivity.class);
+                        MapActivity.this.finish();
+                        startActivity(map_view);
+                    }
+                }.start();
+
 
             }
         });
