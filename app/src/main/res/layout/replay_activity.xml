@@ -14,7 +14,7 @@
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:layout_weight="10"
-            tools:context="com.example.fbh.junqi.StartActivity"
+            tools:context="com.example.fbh.junqi.ReplayActivity"
     >
 
 
@@ -26,37 +26,32 @@
                 android:background="#ffffff"
         >
             <Button
-                    android:id="@+id/start_exit"
+                    android:id="@+id/replay_exit"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
+                    android:disabledAlpha="@android:integer/config_longAnimTime"
+                    android:textSize="25dp"
                     android:text="返回"/>
 
-            <Button
-                    android:id="@+id/start_regret"
-                    android:layout_width="100dp"
+            <ToggleButton
+                    android:id="@+id/change"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="悔棋"/>
-            <Button
-                    android:id="@+id/start_fail"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="投降"/>
-
-            <Button
-                    android:id="@+id/start_map"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="布局"/>
+                    android:textOff="暂停"
+                    android:textOn="开始"
+                    android:textSize="25dp"
+                     />
 
         </LinearLayout>
 
         <AbsoluteLayout
-                android:id="@id/edit_layout"
+                android:id="@+id/replay_layout"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="#00ff00">
             <ImageView
-                    android:id="@id/map_edit"
+                    android:id="@+id/replay_edit"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:background="@drawable/map"

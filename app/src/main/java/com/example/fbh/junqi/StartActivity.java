@@ -43,6 +43,7 @@ public class StartActivity extends Activity {
 //                                .show();
 
                         Log.e("thread test","game end");
+                        ChessBoard.saveToFile();
                         try {
                             Thread.sleep(1700);
                         } catch (InterruptedException e) {
@@ -95,7 +96,7 @@ public class StartActivity extends Activity {
                         .setPositiveButton("确定", null)
                         .show();
 
-
+                ChessBoard.saveToFile();
 //                Intent map_view = new Intent(StartActivity.this, MainActivity.class);
 //                startActivity(map_view);
 
@@ -148,7 +149,7 @@ public class StartActivity extends Activity {
         ChessBoard.Init(ch2,ch1);
 
         mapAll = new MapAll(layout,getBaseContext(),
-                ch2,ch1,0X00ff00);
+                ch2,ch1);
         layout.invalidate();
 
 

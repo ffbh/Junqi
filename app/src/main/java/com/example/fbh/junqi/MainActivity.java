@@ -82,37 +82,37 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.e("click","replay");
 
-                String filePath = "/storage/emulated/0/junqi/map/map1.jq";
-                File outputFile = new File(filePath);
-                if (!outputFile.getParentFile().exists()) {
-                     outputFile.getParentFile().mkdir();
-
-                }
-                Log.e("p_path",outputFile.getParent());
-                try {
-//                    if(!outputFile.exists()) {
-//                        try {
-//                            outputFile.createNewFile();
-//                        } catch (IOException e) {
-//                            Log.e("create_file",e.toString());
-//                            e.printStackTrace();
-//                            return;
-//                        }
+//                String filePath = "/storage/emulated/0/junqi/map/map1.jq";
+//                File outputFile = new File(filePath);
+//                if (!outputFile.getParentFile().exists()) {
+//                     outputFile.getParentFile().mkdir();
 //
-//
-//                    }
-                   // FileOutputStream fos  = openFileOutput(filePath,Context.MODE_PRIVATE);
-                    FileOutputStream fos  = new FileOutputStream(outputFile);
-                    String data = "hello,world! Zhang Phil @ CSDN";
-                    byte[] buffer = data.getBytes();
-                    // 开始写入数据到这个文件。
-                    fos.write(buffer, 0, buffer.length);
-                    fos.flush();
-                    fos.close();
-                } catch (IOException e) {
-                    Log.e("fail",e.toString());
-                    e.printStackTrace();
-                }
+//                }
+//                Log.e("p_path",outputFile.getParent());
+//                try {
+////                    if(!outputFile.exists()) {
+////                        try {
+////                            outputFile.createNewFile();
+////                        } catch (IOException e) {
+////                            Log.e("create_file",e.toString());
+////                            e.printStackTrace();
+////                            return;
+////                        }
+////
+////
+////                    }
+//                   // FileOutputStream fos  = openFileOutput(filePath,Context.MODE_PRIVATE);
+//                    FileOutputStream fos  = new FileOutputStream(outputFile);
+//                    String data = "hello,world! Zhang Phil @ CSDN";
+//                    byte[] buffer = data.getBytes();
+//                    // 开始写入数据到这个文件。
+//                    fos.write(buffer, 0, buffer.length);
+//                    fos.flush();
+//                    fos.close();
+//                } catch (IOException e) {
+//                    Log.e("fail",e.toString());
+//                    e.printStackTrace();
+//                }
 
 //                Log.e("path",outputFile.toString());
 //                Uri textURI = FileProvider.getUriForFile(MainActivity.this.getBaseContext(),
@@ -120,11 +120,12 @@ public class MainActivity extends AppCompatActivity {
 //                        outputFile);
 //                Log.e("uri",textURI.toString());
 
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("*/*");//设置类型，我这里是任意类型，任意后缀的可以这样写。
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                startActivityForResult(intent,FILE_SELECT_CODE);
-
+//                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//                intent.setType("*/*");//设置类型，我这里是任意类型，任意后缀的可以这样写。
+//                intent.addCategory(Intent.CATEGORY_OPENABLE);
+//                startActivityForResult(intent,FILE_SELECT_CODE);
+                Intent replay_view = new Intent(MainActivity.this, ReplayActivity.class);
+                startActivity(replay_view);
             }
         });
 
@@ -142,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private static final int FILE_SELECT_CODE = 0;
-    private static final String TAG = "VideoActivity";
+    private static final String TAG = "MainActivity";
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub

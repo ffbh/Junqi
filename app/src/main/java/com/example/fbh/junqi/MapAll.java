@@ -2,6 +2,7 @@ package com.example.fbh.junqi;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Handler;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -21,11 +22,11 @@ public class MapAll {
     private TextView text;
     private Context context = null;
     AbsoluteLayout father = null;
-    public MapAll(AbsoluteLayout father, Context context, String[] ch1,String[] ch2, int color) {
+    public MapAll(AbsoluteLayout father, Context context, String[] ch1,String[] ch2) {
 
         this.father = father;
         this.context = context;
-        Init(ch1,ch2,color);
+        Init(ch1,ch2);
     }
 
 
@@ -57,7 +58,7 @@ public class MapAll {
     }
 
 
-    void Init(String[] ch1,String[] ch2,int color){
+    void Init(String[] ch1,String[] ch2){
 
         int size_w = 200;
         int size_h = 100;
@@ -220,5 +221,70 @@ public class MapAll {
         }
         return num == 2;
     }
+
+    private Button getChess(int x,int y){
+        if(x<6){
+           return chessUp[x][y];
+        }
+        else if(x ==6){
+            return chessM[y];
+        }
+        else{
+           return chessDown[x-7][y];
+        }
+    }
+
+    private Handler handler=new Handler();
+    private static String a,b;
+    private static Button A,B;
+  public void moveTo(int sx,int sy,int ex,int ey){
+        A = getChess(sx,sy);
+        B = getChess(ex,ey);
+        ChessBoard.click(new Pair(sx,sy));
+        Pair<Boolean,Integer> ans = ChessBoard.move(new Pair(ex,ey));
+        a = A.getText().toString();
+        b = B.getText().toString();
+
+      if(ans.second == 1){
+          handler.post(new Runnable() {
+          @Override
+          public void run() {
+              B.setText(a);
+              A.setText("");
+              B.getBackground().setAlpha(255);
+              A.getBackground().setAlpha(0);
+              if (ChessBoard.getFlag())
+                  B.setBackgroundColor(ChessBoard.m2);
+              else
+                  B.setBackgroundColor(ChessBoard.m1);
+          }
+      });
+
+      }
+      else if(ans.second == 0){
+          handler.post(new Runnable() {
+              @Override
+              public void run() {
+                  B.setText("");
+                  A.setText("");
+
+                  B.getBackground().setAlpha(0);
+                  A.getBackground().setAlpha(0);
+              }
+          });
+
+      }
+      else{
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    B.setText("");
+                    B.getBackground().setAlpha(0);
+                }
+            });
+
+      }
+  }
+
 
 }

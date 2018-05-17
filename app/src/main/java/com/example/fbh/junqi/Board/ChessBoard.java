@@ -5,8 +5,15 @@ import android.util.Log;
 import android.util.Pair;
 import android.widget.Button;
 import com.example.fbh.junqi.StartActivity;
+import com.example.fbh.junqi.file.Util;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
 import java.util.Stack;
 
 public class ChessBoard {
@@ -21,6 +28,9 @@ public class ChessBoard {
     public static Chess old = null;
     public static Pair<Integer,Integer> old_pos;
     public static Stack<Pair<Pair<Integer,Integer>,Chess>> V = new Stack<>();
+
+    public static String[] A,B;
+    public static ArrayList<Pair<Pair<Integer,Integer>,Pair<Integer,Integer>>> op = new ArrayList<>();
 
     static {
         for(int i=0;i<13;++i)
@@ -117,9 +127,9 @@ public class ChessBoard {
         for(int k=1;k<=11;++k)
             BoardMap[k][0] = BoardMap[k][4] = true;
 
-
-        Log.e("size",VI[6][2].size()+"");
-        Log.e("val",VI[6][2].toString());
+//
+//        Log.e("size",VI[6][2].size()+"");
+//        Log.e("val",VI[6][2].toString());
 
 
     }
@@ -257,6 +267,7 @@ public class ChessBoard {
         if(v){
             V.add(new Pair(new Pair(old_pos.first,old_pos.second), new Chess(old.getName(),old.getColor())));
             V.add(new Pair(new Pair(p.first,p.second),new Chess(click.getName(),click.getColor())));
+            op.add(new Pair(new Pair(old_pos.first,old_pos.second),new Pair(p.first,p.second)));
             if(k==1){
                 click.change(old);
                 old.dead();
@@ -286,6 +297,10 @@ public class ChessBoard {
     }
 
     public static void Init(String[] ch1,String[] ch2){
+        A = ch1;
+        B = ch2;
+        op.clear();
+
         for(int i=0;i<6;++i)
             for(int j=0;j<5;++j)
             chessBoard[i][j] = new Chess(ch1[i*5+j],m2);
@@ -309,13 +324,72 @@ public class ChessBoard {
         StartActivity.mapAll.setChess(b.first,b.second);
         chessBoard[a.first.first][a.first.second].change(a.second);
         chessBoard[b.first.first][b.first.second].change(b.second);
+        op.remove(op.size()-1);
         next_round();
         return true;
     }
 
 
+    public static void saveToFile(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String name = sdf.format(new Date());
+
+        String all = "";
+        for(String s : A){
+            if(s.length() != 0){
+                all += s;
+            }
+            else{
+                all += "空空";
+            }
+            all+=" ";
+        }
+        for(String s : B){
+            if(s.length() != 0){
+                all += s;
+            }
+            else{
+                all += "空空";
+            }
+            all+=" ";
+        }
+
+        for(Pair<Pair<Integer,Integer>,Pair<Integer,Integer>> p : op){
+            all += p.first.first +" "+p.first.second +" "+p.second.first +" "+p.second.second+" ";
+        }
+
+        File file = new File("/storage/emulated/0/junqi/replay/"+name);
+        if(!file.getParentFile().exists()){
+            file.getParentFile().mkdirs();
+        }
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+
+            Util.Write(fos,all);
+
+        } catch (FileNotFoundException e) {
+            Log.e("file_error",e.toString());
+            e.printStackTrace();
+        }
 
 
+    }
+
+
+    public static void replay_Init(String s){
+        String[] ch1 = new String[30];
+        String[] ch2 = new String[30];
+        Scanner sc = new Scanner(s);
+        for(int i=0;i<30;++i){
+            ch1[i] = sc.next();
+        }
+
+        for(int i=0;i<30;++i){
+            ch2[i] = sc.next();
+        }
+
+        Init(ch1,ch2);
+    }
 
 
 

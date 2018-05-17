@@ -12,6 +12,8 @@ import com.example.fbh.junqi.StartActivity;
 public class StartEvent implements View.OnClickListener {
     private static Button but = null;
     public static boolean gameover = false;
+
+
     @Override
     public void onClick(View v) {
         Log.e("click","start move");
