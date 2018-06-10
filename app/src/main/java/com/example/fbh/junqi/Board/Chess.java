@@ -14,6 +14,7 @@ public class Chess {
     static {
         H.put("",0);
         H.put("军旗",0);
+        H.put("地雷",1);
         H.put("工兵",2);
         H.put("排长",3);
         H.put("连长",4);
@@ -23,6 +24,15 @@ public class Chess {
         H.put("师长",8);
         H.put("军长",9);
         H.put("司令",10);
+    }
+
+    public static int getScore(String name){
+        if(H.containsKey(name)){
+            return H.get(name);
+        }
+        else{
+            return 0;
+        }
     }
 
     public Chess(String name, int color) {

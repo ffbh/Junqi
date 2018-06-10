@@ -136,7 +136,7 @@ public class MapActivity extends Activity {
         String ans = null;
         try {
             FileInputStream fis = new FileInputStream(path);
-      //      ans = Util.Read(openFileInput(path));
+            //      ans = Util.Read(openFileInput(path));
             ans = Util.Read(fis);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

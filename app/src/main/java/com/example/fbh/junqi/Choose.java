@@ -17,13 +17,25 @@ public class Choose extends Activity{
     private static String choose_F = "A";
     private static final int FILE_SELECT_CODE = 0;
     private static Button A,B;
+
+    private static String getName(String p){
+        int spos = p.lastIndexOf("/");
+        spos++;
+        char dot = '.';
+        int epos = p.lastIndexOf(dot);
+        if(epos == -1)
+            return p.substring(spos);
+        return p.substring(spos,epos);
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose);
 
         A = (Button)findViewById(R.id.A);
-        A.setText(Apath);
+        A.setText(getName(Apath));
         A.invalidate();
         A.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +53,7 @@ public class Choose extends Activity{
         });
 
         B = (Button)findViewById(R.id.B);
-        B.setText(Bpath);
+        B.setText(getName(Bpath));
         B.invalidate();
         B.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,12 +103,12 @@ public class Choose extends Activity{
             Log.e("se", "------->" + path);
             if(choose_F.equals("A")){
                 Apath  = path;
-                A.setText(path);
+                A.setText(getName(path));
                 A.invalidate();
             }
             else{
                 Bpath = path;
-                B.setText(path);
+                B.setText(getName(path));
                 B.invalidate();
             }
 

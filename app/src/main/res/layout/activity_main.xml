@@ -8,6 +8,8 @@
     tools:context="com.example.fbh.junqi.MainActivity">
 
 
+
+
     <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -15,34 +17,49 @@
             android:gravity="center_horizontal"
             android:layout_weight="10"
             android:padding="5dp"
-            android:background="#6E7B8B"
-    >
 
+            android:background="@drawable/back"
+
+    >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="            "
+            android:textColor="#000000"
+            android:textSize="70dip"
+
+            android:background="#00000000"
+            android:id="@+id/start"/>
       <Button
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="开始"
+              android:text="            "
               android:textColor="#000000"
               android:textSize="70dip"
 
-              android:id="@+id/start"/>
+          android:background="#00000000"
+              android:id="@+id/rank"/>
       <Button
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="阵型"
+              android:text="            "
               android:textSize="70dip"
+          android:background="#00000000"
               android:id="@+id/map"/>
       <Button
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="复盘"
+              android:text="            "
               android:textSize="70dip"
+          android:background="#00000000"
               android:id="@+id/replay"/>
       <Button
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="退出"
+              android:text="            "
+          android:background="#00000000"
               android:textSize="70dip"
+
               android:id="@+id/quit"/>
     </LinearLayout>
 

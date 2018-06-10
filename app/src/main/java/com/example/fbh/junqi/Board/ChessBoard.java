@@ -4,19 +4,27 @@ import android.graphics.Color;
 import android.util.Log;
 import android.util.Pair;
 import android.widget.Button;
+
+import com.example.fbh.junqi.RankActivity;
 import com.example.fbh.junqi.StartActivity;
 import com.example.fbh.junqi.file.Util;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Stack;
 
 public class ChessBoard {
+    public static int Ascore,Bscore;
     public static Chess[][] chessBoard = new Chess[13][5];
     private static ArrayList<Pair<Integer,Integer>>[][] VI = new ArrayList[13][5];
     private static boolean BoardMap[][] = new boolean[13][5];
@@ -269,14 +277,37 @@ public class ChessBoard {
             V.add(new Pair(new Pair(p.first,p.second),new Chess(click.getName(),click.getColor())));
             op.add(new Pair(new Pair(old_pos.first,old_pos.second),new Pair(p.first,p.second)));
             if(k==1){
+                if(flag){
+                    Ascore += Chess.getScore(click.getName());
+                }
+                else{
+                    Bscore += Chess.getScore(click.getName());
+                }
                 click.change(old);
                 old.dead();
+
+
+
             }
             else if(k==0){
                 click.dead();
                 old.dead();
+                if(flag){
+                    Ascore += Chess.getScore(click.getName());
+                    Bscore += Chess.getScore(old.getName());
+                }
+                else{
+                    Bscore += Chess.getScore(click.getName());
+                    Ascore += Chess.getScore(old.getName());
+                }
             }
             else{
+                if(flag){
+                    Bscore += Chess.getScore(old.getName());
+                }
+                else{
+                    Ascore += Chess.getScore(old.getName());
+                }
                 old.dead();
             }
 
@@ -372,7 +403,7 @@ public class ChessBoard {
             e.printStackTrace();
         }
 
-
+        saveRank();
     }
 
 
@@ -391,7 +422,58 @@ public class ChessBoard {
         Init(ch1,ch2);
     }
 
+    public static void saveRank(){
+        int score = 0;
+        if(!flag){
+            score = Ascore;
+        }
+        else {
+            score = Bscore;
+        }
+        String ans = null;
 
+        try {
+            FileInputStream fis = new FileInputStream(RankActivity.path);
+            //      ans = Util.Read(openFileInput(path));
+            ans = Util.Read(fis);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        Log.e("gameend","score:"+score);
+
+        String[] scores = ans.split("\\s+");
+        ArrayList<Integer> ss = new ArrayList<>();
+        for(int i=0;i<scores.length;++i){
+            if(scores[i].trim().length() != 0)
+                ss.add(Integer.parseInt(scores[i]));
+            else
+                ss.add(0);
+        }
+        ss.add(score);
+        while(ss.size()<4)
+            ss.add(0);
+        Collections.sort(ss);
+
+        int len = ss.size();
+        String fff = "";
+        for(int i=-1;i>=-4;--i)
+            fff = fff+" "+ss.get(len + i);
+
+        try {
+            FileOutputStream fos = new FileOutputStream(RankActivity.path);
+            Log.e("score",""+fff);
+            Util.Write(fos,fff);
+
+        } catch (FileNotFoundException e) {
+            Log.e("file_error",e.toString());
+            e.printStackTrace();
+        }
+    }
 
 
 

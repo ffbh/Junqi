@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AbsoluteLayout;
 import android.widget.Button;
+
+import com.example.fbh.junqi.Board.Chess;
 import com.example.fbh.junqi.Board.ChessBoard;
 import com.example.fbh.junqi.ClickEvent.StartEvent;
 import com.example.fbh.junqi.file.Util;
@@ -53,7 +55,7 @@ public class StartActivity extends Activity {
                         break;
                     }
                     else{
-                        Log.e("thread test","game not end");
+                //        Log.e("thread test","game not end");
                     }
                 }
             }

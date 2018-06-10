@@ -14,6 +14,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.fbh.junqi.Board.ChessBoard;
 import com.example.fbh.junqi.ClickEvent.StartEvent;
 import com.example.fbh.junqi.file.Util;
 
@@ -29,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
 //        DisplayMetrics metric = new DisplayMetrics();
 //        getWindowManager().getDefaultDisplay().getMetrics(metric);
 //        Log.e(metric.widthPixels+"",metric.heightPixels+"");
+
+
+
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -56,10 +64,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.e("click","start");
                 StartEvent.gameover = false;
+                ChessBoard.Ascore = ChessBoard.Bscore = 0;
                Intent start_view = new Intent(MainActivity.this, StartActivity.class);
                startActivity(start_view);
 
 
+            }
+        });
+
+
+        Button rank = (Button)findViewById(R.id.rank);
+        rank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("click","rank");
+                Intent rank_view = new Intent(MainActivity.this, RankActivity.class);
+                startActivity(rank_view);
             }
         });
 
